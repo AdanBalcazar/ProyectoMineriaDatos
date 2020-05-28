@@ -1,0 +1,8 @@
+library("readxl")
+library(corrplot)
+DatosILE <- read_excel("/Users/Adan/Desktop/PROYECTO MINERIA/Primer podada v2_0.xlsx")
+DatosILE
+MatrizCorrelaciones <- cor(DatosILE)
+MatrizCorrelaciones
+corrplot(MatrizCorrelaciones)
+corrplot(MatrizCorrelaciones, type="upper", tl.srt=45, order="hclust")
