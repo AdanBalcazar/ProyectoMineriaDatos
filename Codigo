@@ -3,7 +3,7 @@ library("readxl")
 library(corrplot)
 
 # Carga de datos desde la fuente
-DatosILE <- read_excel("/Users/Adan/Desktop/PROYECTO MINERIA/Primer podada v2_0.xlsx")
+DatosILE <- read_excel("/Users/Adan/Desktop/PROYECTO MINERIA/Segunda podada.xlsx")
 DatosILE
 
 # Cálculo de la matriz de correlaciones para disminuir la dimensionalidad de los datos
@@ -14,6 +14,9 @@ corrplot(MatrizCorrelaciones, type="upper", tl.srt=45, order="hclust") # Grafica
 # Cálculo de la matriz de distancias para determinar la relación entre los registros de la fuente
 MatrizDistancias <- dist(DatosILE, method="euclidean")
 
-# Aplicación del método de agrupamiento jerárquico
-AgrupamientoJerarquico <- hclust(MatrizDistancias)
-plot(AgrupamientoJerarquico)
+# Aplicación del método del codo
+set.seed(100)
+SSE <- sapply(2:10, function(k){ kmeans(DatosILE, k, nstart=9)$tot.withinss } )
+plot(2:10, SSE, type = "b", pch = 19, frame = FALSE, xlab = "Numero de grupos", ylab = "Suma total de cuadrados")
+abline(v=4, lty=2)
+
