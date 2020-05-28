@@ -1,8 +1,19 @@
+# Importación de bibliotecas
 library("readxl")
 library(corrplot)
+
+# Carga de datos desde la fuente
 DatosILE <- read_excel("/Users/Adan/Desktop/PROYECTO MINERIA/Primer podada v2_0.xlsx")
 DatosILE
+
+# Cálculo de la matriz de correlaciones para disminuir la dimensionalidad de los datos
 MatrizCorrelaciones <- cor(DatosILE)
 MatrizCorrelaciones
-corrplot(MatrizCorrelaciones)
-corrplot(MatrizCorrelaciones, type="upper", tl.srt=45, order="hclust")
+corrplot(MatrizCorrelaciones, type="upper", tl.srt=45, order="hclust") # Graficación de la matriz
+
+# Cálculo de la matriz de distancias para determinar la relación entre los registros de la fuente
+MatrizDistancias <- dist(DatosILE, method="euclidean")
+
+# Aplicación del método de agrupamiento jerárquico
+AgrupamientoJerarquico <- hclust(MatrizDistancias)
+plot(AgrupamientoJerarquico)
