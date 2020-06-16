@@ -24,3 +24,4 @@ abline(v=4, lty=2)
 set.seed(123)
 AgParticional <- kmeans(DatosILE, centers=4, iter.max=20)
 cluster::clusplot(DatosILE, AgParticional$cluster, color=T, col.p=c ("blue", "red", "green", "pink"), shade=T, main='Mujeres que se practican un ILE') # Graficación de los datos
+AgParticional
