@@ -15,13 +15,13 @@ corrplot(MatrizCorrelaciones, type="upper", tl.srt=45, order="hclust") # Grafica
 MatrizDistancias <- dist(DatosILE, method="euclidean")
 
 # Aplicación del método del codo
-set.seed(123)
+set.seed(100)
 SSE <- sapply(2:10, function(k){ kmeans(DatosILE, k, nstart=9)$tot.withinss } )
 plot(2:10, SSE, type = "b", pch = 19, frame = FALSE, xlab = "Numero de grupos", ylab = "Suma total de cuadrados")
 abline(v=4, lty=2)
 
 # Agrupamiento particional
-set.seed(123)
+set.seed(100)
 AgParticional <- kmeans(DatosILE, centers=4, iter.max=20)
 cluster::clusplot(DatosILE, AgParticional$cluster, color=T, col.p=c ("blue", "red", "green", "pink"), shade=T, main='Mujeres que se practican un ILE') # Graficación de los datos
 AgParticional
